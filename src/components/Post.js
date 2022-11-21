@@ -1,8 +1,11 @@
+import React from "react"
+let i = 0
+
 export default function Post() {
 
     const conteudoPosts = [
-        { imagemuser: "assets/img/meowed.svg", usuario: "meowed", imagemconteudo: "assets/img/gato-telefone.svg", imagemlike: "assets/img/respondeai.svg", curtido: "respondeai", quantidade: "101.523" },
-        { imagemuser: "assets/img/barked.svg", usuario: "barked", imagemconteudo: "assets/img/dog.svg", imagemlike: "assets/img/adorable_animals.svg", curtido: "adorable_animals", quantidade: "99.159" }
+        { imagemuser: "assets/img/meowed.svg", usuario: "meowed", imagemconteudo: "assets/img/gato-telefone.svg", imagemlike: "assets/img/respondeai.svg", curtido: "respondeai", quantidade: 101523 },
+        { imagemuser: "assets/img/barked.svg", usuario: "barked", imagemconteudo: "assets/img/dog.svg", imagemlike: "assets/img/adorable_animals.svg", curtido: "adorable_animals", quantidade: 99159 }
     ]
 
     return (
@@ -16,6 +19,8 @@ export default function Post() {
 }
 
 function TopoConteudo(props) {
+
+const [curtida, setCurtida] = React.useState(props.dados.quantidade)
     return (
         <div>
             <div class="topo">
@@ -33,7 +38,7 @@ function TopoConteudo(props) {
             <div class="fundo">
                 <div class="acoes">
                     <div>
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon onClick={() => quantCurtidas()}name="heart-outline"></ion-icon>
                         <ion-icon name="chatbubble-outline"></ion-icon>
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </div>
@@ -44,7 +49,7 @@ function TopoConteudo(props) {
                 <div class="curtidas">
                     <img src={props.dados.imagemlike} />
                     <div class="texto">
-                        Curtido por <strong>{props.dados.curtido}</strong> e <strong>outras {props.dados.quantidade} pessoas</strong>
+                        Curtido por <strong>{props.dados.curtido}</strong> e <strong>outras {curtida} pessoas</strong>
                     </div>
                 </div>
             </div>
@@ -52,8 +57,17 @@ function TopoConteudo(props) {
 
         </div>
     )
+   function quantCurtidas(){
 
-}
+    i = i+1
+        if (i % 2 !== 0){
+            setCurtida(curtida+1)
+        } else if(i % 2 === 0){
+            setCurtida(curtida-1)
+        }
+        
+        } 
+   }
 
 
 
